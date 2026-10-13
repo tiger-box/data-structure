@@ -87,9 +87,23 @@ func (ht *hashTable) delete(key string) {
 	head := ht.buckets[index]
 
 	current := head.next
-	//prev := head
+	prev := head
+
+	if head.key == key {
+		ht.buckets[index] = head
+		ht.size--
+		return
+	}
 
 	for current != nil {
+		if current.key == key {
+			prev.next = current.next
+			ht.size--
+			return
+		}
+
+		prev = current
+		current = current.next
 
 	}
 }
